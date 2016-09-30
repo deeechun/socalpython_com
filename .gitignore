@@ -3,6 +3,8 @@
 coverage/
 nose
 /_env*
+/bin/virtualenv-*
+/bin/virtualenv.py
 /*.egg-info
 /cover
 .gitignore
