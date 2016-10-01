@@ -20,7 +20,7 @@
 set -e;
 
 # below is linux only
-SCRIPT_FOLDER="$(dirname $(readlink -f ${0}))";
+#SCRIPT_FOLDER="$(dirname $(readlink -f ${0}))";
 
 # hack to get the directory that is Linux and BSD compatible
 # TODO: fix above
