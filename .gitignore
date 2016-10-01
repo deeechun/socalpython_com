@@ -8,4 +8,4 @@ nose
 /bin/virtualenv.py
 /*.egg-info
 /cover
-.gitignore
+/socalpython.sqlite
