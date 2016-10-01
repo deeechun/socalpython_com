@@ -1,12 +1,7 @@
 import os
 
-from setuptools import setup, find_packages
-
-here = os.path.abspath(os.path.dirname(__file__))
-with open(os.path.join(here, 'README.txt')) as f:
-    README = f.read()
-with open(os.path.join(here, 'CHANGES.txt')) as f:
-    CHANGES = f.read()
+from setuptools import find_packages
+from setuptools import setup
 
 requires = [
     'pyramid',
@@ -25,31 +20,48 @@ tests_require = [
     'pytest-cov',
     ]
 
-setup(name='socalpython',
-      version='0.0',
-      description='socalpython',
-      long_description=README + '\n\n' + CHANGES,
-      classifiers=[
-          "Programming Language :: Python",
-          "Framework :: Pyramid",
-          "Topic :: Internet :: WWW/HTTP",
-          "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
-      ],
-      author='',
-      author_email='',
-      url='',
-      keywords='web wsgi bfg pylons pyramid',
-      packages=find_packages(),
-      include_package_data=True,
-      zip_safe=False,
-      extras_require={
-          'testing': tests_require,
-      },
-      install_requires=requires,
-      entry_points="""\
-      [paste.app_factory]
-      main = socalpython:main
-      [console_scripts]
-      initialize_socalpython_db = socalpython.scripts.initializedb:main
-      """,
-      )
+def main():
+    """
+    Runs setuptools setup function which configures this package options like
+    requirements.
+    """
+
+    package_folder = os.path.abspath(os.path.dirname(__file__))
+    with open(os.path.join(package_folder, 'README.rst')) as readme_file:
+        README = readme_file.read()
+    with open(os.path.join(package_folder, 'CHANGES.rst')) as changes_file:
+        CHANGES = changes_file.read()
+
+    setup(
+        name='socalpython',
+        version='0.1dev',
+        description='socalpython',
+        long_description=README + '\n\n' + CHANGES,
+        classifiers=[
+            "Programming Language :: Python",
+            "Framework :: Pyramid",
+            "Topic :: Internet :: WWW/HTTP",
+            "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
+        ],
+        author='',
+        author_email='',
+        url='',
+        keywords='pyramid',
+        packages=find_packages(),
+        include_package_data=True,
+        zip_safe=False,
+        extras_require={
+            'testing': tests_require,
+        },
+        install_requires=requires,
+        entry_points="""\
+        [paste.app_factory]
+        main = socalpython:main
+        [console_scripts]
+        initialize_socalpython_db = socalpython.scripts.initializedb:main
+        """,
+        )
+
+
+if __name__ == '__main__':
+    main()
