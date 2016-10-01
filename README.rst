@@ -59,6 +59,13 @@ Install socalpython package in development mode:
     pip install --editable .
 
 
+If you have not created a database yet please do so:
+
+.. code::
+
+   initialize_socalpython_db development.ini
+
+
 Run application web server
 
 .. code::
