@@ -19,7 +19,12 @@
 # break on first error
 set -e;
 
+# below is linux only
 SCRIPT_FOLDER="$(dirname $(readlink -f ${0}))";
+
+# hack to get the directory that is Linux and BSD compatible
+# TODO: fix above
+SCRIPT_FOLDER="$(pwd)";
 
 ## code to get the url of the virtualenv with specific version
 #
@@ -60,7 +65,7 @@ function main {
     # get the folder for the extracted virtualenv
     virtualenv_folder="$(cd virtualenv-*/; pwd)";
 
-    # create 
+    # create
     echo "#!/usr/bin/env python3.5" > "${virtualenv_folder}"/virtualenv3.py;
     tail -n +2 "${virtualenv_folder}"/virtualenv.py >> "${virtualenv_folder}"/virtualenv3.py;
     chmod +x "${virtualenv_folder}"/virtualenv3.py;
