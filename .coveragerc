@@ -1,0 +1,3 @@
+[run]
+source = socalpython
+omit = socalpython/test*
