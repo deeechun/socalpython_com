@@ -17,45 +17,46 @@
 # ########################################################################### #
 
 # break on first error
-set -e;
+#set -e;
 
-# below is linux only
-#SCRIPT_FOLDER="$(dirname $(readlink -f ${0}))";
+# virtualenv package version
+VIRTUALENV_PACKAGE_VERSION="15.0.3";
 
-# hack to get the directory that is Linux and BSD compatible
-# TODO: fix above
-SCRIPT_FOLDER="$(pwd)";
-
-## code to get the url of the virtualenv with specific version
-#
-# PY_CODE='
-# import xmlrpclib;
-# PYPI_URL="https://pypi.python.org/pypi";
-# PACKAGE_NAME="virtualenv";
-# PACKAGE_VERSION="1.5.0.3"
-# client = xmlrpclib.ServerProxy(PYPI_URL);
-# release_urls = client.release_urls(PACKAGE_NAME, PACKAGE_VERSION);
-# url = [pkg["url"] for pkg in release_urls if pkg["packagetype"] == "sdist"][0];
-# print url;
-# ';
-# # get the download url for virtualenv
-# DOWNLOAD_URL="$(python -c "${PY_CODE}")";
-
-DOWNLOAD_URL="https://pypi.python.org/packages/8b/2c/c0d3e47709d0458816167002e1aa3d64d03bdeb2a9d57c5bd18448fd24cd/virtualenv-15.0.3.tar.gz";
+# get the script folder in a Linux and BSD/OSX friendly manner
+SCRIPT_FOLDER="$(cd $(dirname $0); pwd -P;)";
 
 # ........................................................................... #
+function find_python_binary {
+    local found;
+
+    for python_binary in "python35" "python3.5"; do
+        found="$(type -P ${python_binary} > /dev/null 2>&1; echo $?)";
+        if [[ $found == 0 ]]; then
+            type -P "${python_binary}";
+            return 0;
+        fi
+    done
+
+    return 1;
+}
+
+# ........................................................................... #
+# download virtualenv, and create virtualenv3.py with a sheebang to python 3.5
+# then make this virtualenv script available as ./bin/virtualenv.py
+# Note: this will also clean up any past virtualenv
 function main {
     local virtualenv_folder;
+    local python_binary_name;
 
     cd "${SCRIPT_FOLDER}/bin";
 
     # remove existing virtualenv directory and symlink
     rm -rf virtualenv*
 
-    # download the tarball
+    # download the virtualenv tarball
     curl \
       --remote-name \
-        "${DOWNLOAD_URL}";
+        "$(get_virtualenv_download_url)";
 
     # extract tarball
     tar xf virtualenv*.tar.gz;
@@ -65,8 +66,10 @@ function main {
     # get the folder for the extracted virtualenv
     virtualenv_folder="$(cd virtualenv-*/; pwd)";
 
-    # create
-    echo "#!/usr/bin/env python3.5" > "${virtualenv_folder}"/virtualenv3.py;
+    python_binary_name="$(basename $(find_python_binary))";
+
+    # create virtualenv3.py with a sheebang to
+    echo "#!/usr/bin/env ${python_binary_name}" > "${virtualenv_folder}"/virtualenv3.py;
     tail -n +2 "${virtualenv_folder}"/virtualenv.py >> "${virtualenv_folder}"/virtualenv3.py;
     chmod +x "${virtualenv_folder}"/virtualenv3.py;
 
@@ -77,6 +80,35 @@ function main {
     echo "./bin/virtualenv.py for Python 3.5 is now available"
 
 }
+
+# ........................................................................... #
+# use python and xmlrpc client to get the URL for virtualenv package
+# this code accomodates both python2 and python3
+# echo out the url
+# user VIRTUALENV_PACKAGE_VERSION global variable
+function get_virtualenv_download_url {
+    local py_code="
+PACKAGE_NAME='virtualenv';
+PACKAGE_VERSION='${VIRTUALENV_PACKAGE_VERSION}';
+PYPI_URL='https://pypi.python.org/pypi';
+
+import sys
+
+if sys.version_info.major == 2:
+    import xmlrpclib as xmlrpc_client;
+elif sys.version_info.major == 3:
+    import xmlrpc.client as xmlrpc_client;
+
+client = xmlrpc_client.ServerProxy(PYPI_URL);
+release_urls = client.release_urls(PACKAGE_NAME, PACKAGE_VERSION);
+url = [pkg['url'] for pkg in release_urls if pkg['packagetype'] == 'sdist'][0];
+print(url);
+sys.exit(0);
+";
+
+    echo "$(python -c "${py_code}")";
+}
+
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ #
 main;
