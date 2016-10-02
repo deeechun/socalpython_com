@@ -59,15 +59,28 @@ Install socalpython package in development mode:
     pip install --editable .
 
 
-If you have not created a database yet please do so:
+Creating the database
+=====================
+
+If this is the first time you setup the codebase or if you removed the previous
+database you will need to (re)create it.
 
 .. code::
 
    initialize_socalpython_db development.ini
 
 
-Run application web server
+Running Development SocalPython.com
+===================================
+
+To run socalpython.com locally development use the following:
 
 .. code::
 
-    pserve development.ini
+    pserve --reload development.ini
+
+.. note::
+
+    The ``--reload`` flag is used to automatically reload your codebase and
+    templates when you modify them.
+
