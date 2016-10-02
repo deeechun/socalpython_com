@@ -9,3 +9,7 @@ nose
 /*.egg-info
 /cover
 /socalpython.sqlite
+
+# ignore docsument build subfolders except for the .gitkeep file
+/docs/build/
+!/docs/build/.gitkeep
