@@ -3,7 +3,8 @@ import os
 from setuptools import find_packages
 from setuptools import setup
 
-requires = [
+# ........................................................................... #
+install_requires = [
     'pyramid',
     'pyramid_jinja2',
     'pyramid_debugtoolbar',
@@ -14,12 +15,19 @@ requires = [
     'waitress',
     ]
 
-tests_require = [
+tests_requires = [
     'WebTest >= 1.3.1',  # py3 compat
-    'pytest',  # includes virtualenv
+    'pytest',            # includes virtualenv
     'pytest-cov',
     ]
 
+# install requires
+docs_requires = [
+    'sphinx',
+    'rst2html5-tools',
+    ]
+
+# ........................................................................... #
 def main():
     """
     Runs setuptools setup function which configures this package options like
@@ -51,9 +59,10 @@ def main():
         include_package_data=True,
         zip_safe=False,
         extras_require={
-            'testing': tests_require,
+            'testing': tests_requires,
+            'docs': docs_requires,
         },
-        install_requires=requires,
+        install_requires=install_requires,
         entry_points="""\
         [paste.app_factory]
         main = socalpython:main
@@ -63,5 +72,6 @@ def main():
         )
 
 
+# ........................................................................... #
 if __name__ == '__main__':
     main()

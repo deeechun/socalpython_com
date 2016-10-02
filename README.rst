@@ -2,6 +2,8 @@
 SocalPython.com
 ###############
 
+This is project for SocalPython.com
+
 Installation
 ============
 
@@ -33,10 +35,12 @@ folder. Please note this script is convinience.
     bellow as needed. However, if you want it to match production it needs to
     be the same version.
 
-Optionally, if the _env35 already exists remove it:
+
+Optionally, if the _env35 already exists deactivate and remove it:
 
 .. code::
 
+    deactivate
     rm -rf _env35
 
 Create a new Python virtual environment.
@@ -70,8 +74,8 @@ database you will need to (re)create it.
    initialize_socalpython_db development.ini
 
 
-Running Development SocalPython.com
-===================================
+Running dvelopment server
+=========================
 
 To run socalpython.com locally development use the following:
 
@@ -84,3 +88,41 @@ To run socalpython.com locally development use the following:
     The ``--reload`` flag is used to automatically reload your codebase and
     templates when you modify them.
 
+
+About our testing setup
+=======================
+
+Our setup uses a popular and extensible `pytest <http://pytest.org>`_
+testing framework.
+
+It can be used to run unit, functional and integration tests.
+
+For BDD style testing we use `pytest-bdd <https://pytest-bdd.readthedocs.io/>`_
+package).
+
+
+Installing testing tools
+------------------------
+
+Basic setup project setup does not install tools used for testing. This is done
+so to make it possible to deploy the application in production where the
+testing tools are not needed on the server itself.
+
+
+.. code::
+
+    pip install --editable .[testing]
+
+
+The packages that are installed for testing are specified in the 'testing'
+section in ``setup.py``.
+
+
+Running Tests
+-------------
+
+To run test use the `pytest` utility.
+
+.. code::
+
+   pytest --verbose
