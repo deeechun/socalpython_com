@@ -91,9 +91,9 @@ qthelp:
 	@echo
 	@echo "Build finished; now you can run "qcollectiongenerator" with the" \
 	      ".qhcp project file in $(BUILDDIR)/qthelp, like this:"
-	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/SocalPythoncom.qhcp"
+	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/SocalPythoncomBuildItPresentations.qhcp"
 	@echo "To view the help file:"
-	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/SocalPythoncom.qhc"
+	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/SocalPythoncomBuildItPresentations.qhc"
 
 .PHONY: applehelp
 applehelp:
@@ -110,8 +110,8 @@ devhelp:
 	@echo
 	@echo "Build finished."
 	@echo "To view the help file:"
-	@echo "# mkdir -p $$HOME/.local/share/devhelp/SocalPythoncom"
-	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/SocalPythoncom"
+	@echo "# mkdir -p $$HOME/.local/share/devhelp/SocalPythoncomBuildItPresentations"
+	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/SocalPythoncomBuildItPresentations"
 	@echo "# devhelp"
 
 .PHONY: epub

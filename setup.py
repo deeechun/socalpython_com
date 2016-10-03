@@ -24,7 +24,8 @@ tests_requires = [
 # install requires
 docs_requires = [
     'sphinx',
-    'rst2html5-tools',
+    'sphinx_rtd_theme',
+    'sphinxjp.themes.gopher',
     ]
 
 # ........................................................................... #
