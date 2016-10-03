@@ -1,6 +1,6 @@
-########################
-Creating Pyramid Project
-########################
+##################################
+Creating Basic Pyramid Application
+##################################
 
 First follow instructions in the **Installation** section of the project
 all the way through to **Activating you virtual environment**

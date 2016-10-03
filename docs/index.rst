@@ -170,11 +170,3 @@ To run test use the `pytest` utility.
 .. code::
 
    pytest --verbose
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

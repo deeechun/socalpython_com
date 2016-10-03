@@ -8,8 +8,9 @@ Presentations
 .. toctree::
     :maxdepth: 1
 
-    creating_pyramid_project
-    adding_sphinx
+    starting_project
+    creating_basic_pyramid_application
+    adding_sphinx_documentation
 
 .. toctree::
     :hidden:
