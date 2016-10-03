@@ -1,14 +1,28 @@
+# never ignore gitkeep files used to keep empty folders
+!.gitkeep
+
+# ignore python bytecode cruft
 __pycache__
 *.pyc
-!.gitkeep
-.coverage
-coverage/
+# ignore python development package registry
+/*.egg-info
+
+# ignore virtualenv folders
 /_env*
+/env*
+
+# ignore coverage file
+/.coverage
+/coverage/
+/cover
+
+# ignore virtualenv itself
 /bin/virtualenv-*
 /bin/virtualenv.py
-/*.egg-info
-/cover
-/socalpython.sqlite
 
+# ignore docs and presentation build folders
 /docs/_build
 /presentations/_build
+
+# ignore sqlite database
+/socalpython.sqlite
