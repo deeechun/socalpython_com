@@ -26,6 +26,7 @@ docs_requires = [
     'sphinx',
     'sphinx_rtd_theme',
     'sphinxjp.themes.gopher',
+    'sphinx-autobuild'
     ]
 
 # ........................................................................... #
