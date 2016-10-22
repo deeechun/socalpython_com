@@ -118,6 +118,28 @@ database you will need to (re)create it.
    initialize_socalpython_db development.ini
 
 
+Doing development on the existing code checkout and virtualenv
+===============================================================
+
+Activate your virtual environment
+---------------------------------
+
+Open terminal, use the ``cd`` command to go into the folder with the code
+checkout
+
+.. code::
+
+    cd <your code checkout folder>
+
+
+Activate your SoCalPython.com development virtual environment located in the
+``_env35`` folder using the source command.
+
+.. code::
+
+    source _env35/bin/activate
+
+
 Running development server
 ==========================
 
