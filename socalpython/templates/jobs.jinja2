@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<img src = "/static/socalpython_logo.jpg">
+
+<head>
+	<title>SoCal Python</title>
+</head>
+
+<body>
+{% for job in jobs %}
+
+<h1>{{job.title}} </h1>
+
+<h3>{{job.employer}}</h3>
+
+<p>Qualifications: {{job.qualifications}}</p>
+
+<p>Description: {{job.description}}</p>
+
+<p>Location: {{job.location}}</p>
+
+<p>Date Posted: {{job.date_posted}}</p>
+{% endfor %}
+</body>
+
+</html>
