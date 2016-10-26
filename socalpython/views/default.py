@@ -31,6 +31,7 @@ def jobs(request):
         "qualifications": "Three years experience with Python",
         "description": "This is a fake job.",
         "location": "West LA",
+        "picture": "/static/socalpython_logo.jpg",
         "date_posted": now.strftime("%Y-%m-%d")
         }
 
